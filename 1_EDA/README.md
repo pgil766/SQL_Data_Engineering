@@ -8,7 +8,7 @@ Built with DuckDB to practice data exploration, joins, aggregations, and analyti
 
 ## Summary 
 
-- **Project scope:** Built **3 analytical queries** that answer key questions about the remote data engineer job market  
+- **Project scope:** Built **3 analytical queries** that answer key questions about the data engineer job market  
 - **Data modeling:** Used **multi-table joins** across fact, bridge, and dimension tables to extract insights  
 - **Analytics:** Applied **aggregations, filtering, and sorting** to find top skills by demand, salary, and overall value  
 - **Outcomes:** Delivered **actionable insights** on SQL/Python dominance, cloud trends, and salary patterns
@@ -62,8 +62,8 @@ This project analyzes a **data warehouse** built using a star schema design. The
 
 ### Query Structure
 
-1. **[Top Demanded Skills](./01_top_demanded_skills.sql)** – Identifies the 10 most in-demand skills for remote data engineer positions
-2. **[Top Paying Skills](./02_top_paying_skills.sql)** – Analyzes the 25 highest-paying skills (by median salary) with salary and demand metrics
+1. **[Top Demanded Skills](./01_top_demanded_skills.sql)** – Identifies the 10 most in-demand skills for data engineer positions in Colombia
+2. **[Top Paying Skills](./02_top_paying_skills.sql)** – Analyzes the 25 highest-paying skills for remote positions (by median salary) with salary and demand metrics
 3. **[Optimal Skills](./03_optimal_skills.sql)** – Compares two scoring methods (linear vs. natural log of demand combined with median salary) to identify the most valuable skills to learn
 
 ### Results at a Glance
