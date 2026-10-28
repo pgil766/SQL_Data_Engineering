@@ -1,17 +1,17 @@
-# 🔍 Exploratory Data Analysis w/ SQL: Job Market Analytics
+#  EDA-SQL: Job Market Analytics
 
 A SQL project analyzing the data engineer job market using real world job posting data. It demonstrates my ability to **write analytical SQL, design efficient queries, and turn business questions into data-driven insights**.
 
+Built with DuckDB to practice data exploration, joins, aggregations, and analytical query optimization.
+
 ---
 
-## 🧾 Executive Summary (For Hiring Managers)
+## Summary 
 
-- ✅ **Project scope:** Built **3 analytical queries** that answer key questions about the remote data engineer job market  
-- ✅ **Data modeling:** Used **multi-table joins** across fact, bridge, and dimension tables to extract insights  
-- ✅ **Analytics:** Applied **aggregations, filtering, and sorting** to find top skills by demand, salary, and overall value  
-- ✅ **Outcomes:** Delivered **actionable insights** on SQL/Python dominance, cloud trends, and salary patterns
-
-If you only have a minute, review these:
+- **Project scope:** Built **3 analytical queries** that answer key questions about the remote data engineer job market  
+- **Data modeling:** Used **multi-table joins** across fact, bridge, and dimension tables to extract insights  
+- **Analytics:** Applied **aggregations, filtering, and sorting** to find top skills by demand, salary, and overall value  
+- **Outcomes:** Delivered **actionable insights** on SQL/Python dominance, cloud trends, and salary patterns
 
 1. [`01_top_demanded_skills.sql`](./01_top_demanded_skills.sql) – demand analysis with multi-table joins  
 2. [`02_top_paying_skills.sql`](./02_top_paying_skills.sql) – salary analysis with aggregations  
@@ -19,13 +19,13 @@ If you only have a minute, review these:
 
 ---
 
-## 🧩 Problem & Context
+## Problem & Context
 
 Job market analysts need to answer questions like:
 
-- 🎯 **Most in-demand:** *Which skills are most in-demand for data engineers?*  
-- 💰 **Highest paid:** *Which skills command the highest salaries?*  
-- ⚖️ **Best trade-off:** *What is the optimal skill set balancing demand and compensation?*  
+- **Most in-demand:** *Which skills are most in-demand for data engineers?*  
+- **Highest paid:** *Which skills command the highest salaries?*  
+- **Best trade-off:** *What is the optimal skill set balancing demand and compensation?*  
 
 This project analyzes a **data warehouse** built using a star schema design. The warehouse structure consists of:
 
@@ -36,34 +36,29 @@ This project analyzes a **data warehouse** built using a star schema design. The
   - `company_dim` - Company information linked to job postings
   - `skills_dim` - Skills catalog with skill names and types
 - **Bridge Table:** `skills_job_dim` - Resolves the many-to-many relationship between job postings and skills
-
-By querying across these interconnected tables, I extracted insights about skill demand, salary patterns, and optimal skill combinations for remote data engineering roles.  
-
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
-- 🐤 **Query Engine:** DuckDB for fast OLAP-style analytical queries  
-- 🧮 **Language:** SQL (ANSI-style with analytical functions)  
-- 📊 **Data Model:** Star schema with fact + dimension + bridge tables  
-- 🛠️ **Development:** VS Code for SQL editing + Terminal for DuckDB CLI  
-- 📦 **Version Control:** Git/GitHub for versioned SQL scripts  
-
+- **Query Engine:** DuckDB for fast OLAP-style analytical queries  
+- **Language:** SQL 
+- **Data Model:** Star schema with fact + dimension + bridge tables  
+- **Development:** VS Code for SQL editing + Terminal for DuckDB CLI  
+- **Version Control:** Git/GitHub for versioned SQL scripts  
 ---
-
-## 📂 Repository Structure
+## Repository Structure
 
 ```text
 1_EDA/
 ├── 01_top_demanded_skills.sql    # Demand analysis query
 ├── 02_top_paying_skills.sql      # Salary analysis query
 ├── 03_optimal_skills.sql         # Combined demand/salary optimization
-└── README.md                     # You are here
+└── README.md                     
 ```
 
 ---
 
-## 🏗 Analysis Overview
+## Analysis Overview
 
 ### Query Structure
 
@@ -83,15 +78,15 @@ By querying across these interconnected tables, I extracted insights about skill
 
 ### Key Insights
 
-- 🧠 **Core languages:** SQL and Python each appear in ~29,000 remote job postings, making them the most demanded skills
-- ☁️ **Cloud platforms:** AWS, Azure, and GCP are critical for modern data engineering roles
-- 🧱 **Infra & tooling:** Terraform and Kubernetes are associated with premium salaries ($184K and $150.5K median) while still being widely requested
-- 🔥 **Big data & orchestration:** Spark and Airflow show strong demand with competitive compensation
-- 🦀 **Niche but lucrative:** Rust has the highest median salary ($210K) but limited demand (232 postings)
+- **Core languages:** SQL and Python each appear in ~29,000 remote job postings, making them the most demanded skills
+- **Cloud platforms:** AWS, Azure, and GCP are critical for modern data engineering roles
+- **Infra & tooling:** Terraform and Kubernetes are associated with premium salaries ($184K and $150.5K median) while still being widely requested
+- **Big data & orchestration:** Spark and Airflow show strong demand with competitive compensation
+- **Niche but lucrative:** Rust has the highest median salary ($210K) but limited demand (232 postings)
 
 ---
 
-## 💻 SQL Skills Demonstrated
+## SQL Skills Demonstrated
 
 ### Query Design & Optimization
 
