@@ -1,125 +1,110 @@
-# SQL Data Engineering Projects
+# 🔍 Exploratory Data Analysis w/ SQL: Job Market Analytics
 
-SQL work exploring the data engineering job market: what skills employers want, which ones pay best, and which give the best mix of the two. The queries run on a job postings dataset arranged as a star schema and are written for **DuckDB**.
+A SQL project analyzing the data engineer job market using real world job posting data. It demonstrates my ability to **write analytical SQL, design efficient queries, and turn business questions into data-driven insights**.
 
-## Repository Structure
+---
 
-```
-SQL_Data_Engineering_Projects/
-├── images/                         # Diagrams used in this README
-├── 1_EDA/                          # Exploratory data analysis project
-│   ├── 01_top_demanded_skills.sql  # Most in-demand skills
-│   ├── 02_top_paying_skills.sql    # Highest-paying skills
-│   └── 03_optimal_skills.sql       # Skills that balance demand and salary
-└── Lessons/                        # Practice queries from the course
-    ├── 1.9/   1.9_vscode_intro.sql
-    ├── 1.10/  1.10_Data_Modeling.sql
-    └── 1.11/  1.11_JOINS.sql
-```
+## 🧾 Executive Summary (For Hiring Managers)
 
-## Data Model
+- ✅ **Project scope:** Built **3 analytical queries** that answer key questions about the remote data engineer job market  
+- ✅ **Data modeling:** Used **multi-table joins** across fact, bridge, and dimension tables to extract insights  
+- ✅ **Analytics:** Applied **aggregations, filtering, and sorting** to find top skills by demand, salary, and overall value  
+- ✅ **Outcomes:** Delivered **actionable insights** on SQL/Python dominance, cloud trends, and salary patterns
 
-The dataset is a star schema built around a fact table of job postings:
+If you only have a minute, review these:
 
-| Table               | Type      | Description                                                        |
-|---------------------|-----------|--------------------------------------------------------------------|
-| `job_postings_fact` | Fact      | One row per job posting (title, salary, remote flag, company, etc.) |
-| `skills_job_dim`    | Bridge    | Links job postings to the skills they ask for (many-to-many)      |
-| `skills_dim`        | Dimension | Skill names                                                        |
-| `company_dim`       | Dimension | Company details                                                    |
+1. [`01_top_demanded_skills.sql`](./01_top_demanded_skills.sql) – demand analysis with multi-table joins  
+2. [`02_top_paying_skills.sql`](./02_top_paying_skills.sql) – salary analysis with aggregations  
+3. [`03_optimal_skills.sql`](./03_optimal_skills.sql) – combined demand/salary optimization query  
 
-![Data Warehouse schema](../images/1_2_Data_Warehouse.png)
+---
 
-## Exploratory Data Analysis (`1_EDA/`)
+## 🧩 Problem & Context
 
-All three analyses only look at **remote** (`job_work_from_home = TRUE`) **Data Engineer** postings.
+Job market analysts need to answer questions like:
 
-### 1. Most In-Demand Skills — [`01_top_demanded_skills.sql`](01_top_demanded_skills.sql)
+- 🎯 **Most in-demand:** *Which skills are most in-demand for data engineers?*  
+- 💰 **Highest paid:** *Which skills command the highest salaries?*  
+- ⚖️ **Best trade-off:** *What is the optimal skill set balancing demand and compensation?*  
 
-Counts how many postings mention each skill and returns the top 10.
+This project analyzes a **data warehouse** built using a star schema design. The warehouse structure consists of:
 
-| Rank | Skill      | Postings |
-|------|------------|---------:|
-| 1    | SQL        | 29,221   |
-| 2    | Python     | 28,776   |
-| 3    | AWS        | 17,823   |
-| 4    | Azure      | 14,143   |
-| 5    | Spark      | 12,799   |
-| 6    | Airflow    | 9,996    |
-| 7    | Snowflake  | 8,639    |
-| 8    | Databricks | 8,183    |
-| 9    | Java       | 7,267    |
-| 10   | GCP        | 6,446    |
+![Data Warehouse Schema](../images/1_2_Data_Warehouse.png)
 
-**Takeaway:** SQL and Python lead by a wide margin, followed by cloud platforms (AWS, Azure, GCP) and data tooling (Spark, Airflow, Snowflake, Databricks).
+- **Fact Table:** `job_postings_fact` - Central table containing job posting details (job titles, locations, salaries, dates, etc.)
+- **Dimension Tables:** 
+  - `company_dim` - Company information linked to job postings
+  - `skills_dim` - Skills catalog with skill names and types
+- **Bridge Table:** `skills_job_dim` - Resolves the many-to-many relationship between job postings and skills
 
-### 2. Highest-Paying Skills — [`02_top_paying_skills.sql`](02_top_paying_skills.sql)
+By querying across these interconnected tables, I extracted insights about skill demand, salary patterns, and optimal skill combinations for remote data engineering roles.  
 
-Finds the **median** annual salary for each skill. The median is used instead of the average so outlier salaries have less effect. Only skills with more than 100 postings are kept.
+---
 
-| Skill      | Median Salary | Postings |
-|------------|--------------:|---------:|
-| Rust       | $210,000      | 232      |
-| Terraform  | $184,000      | 3,248    |
-| Golang     | $184,000      | 912      |
-| Spring     | $175,500      | 364      |
-| Neo4j      | $170,000      | 277      |
-| GDPR       | $169,600      | 582      |
-| GraphQL    | $167,500      | 445      |
-| Kubernetes | $150,500      | 4,202    |
-| Airflow    | $150,000      | 9,996    |
+## 🧰 Tech Stack
 
-**Takeaway:** Rust has the highest median salary but fairly few postings. Terraform pays well and is also widely requested. Airflow and Kubernetes are both in high demand and pay competitively.
+- 🐤 **Query Engine:** DuckDB for fast OLAP-style analytical queries  
+- 🧮 **Language:** SQL (ANSI-style with analytical functions)  
+- 📊 **Data Model:** Star schema with fact + dimension + bridge tables  
+- 🛠️ **Development:** VS Code for SQL editing + Terminal for DuckDB CLI  
+- 📦 **Version Control:** Git/GitHub for versioned SQL scripts  
 
-### 3. Optimal Skills (Demand × Salary) — [`03_optimal_skills.sql`](03_optimal_skills.sql)
+---
 
-Ranks skills with a score that combines demand and median salary. Only postings with a stated annual salary are included. Two scoring methods are compared:
+## 📂 Repository Structure
 
-**Option 1: Linear score**
-
-```
-optimal_score = demand_count * salary_median
+```text
+1_EDA/
+├── 01_top_demanded_skills.sql    # Demand analysis query
+├── 02_top_paying_skills.sql      # Salary analysis query
+├── 03_optimal_skills.sql         # Combined demand/salary optimization
+└── README.md                     # You are here
 ```
 
-Demand counts vary much more than salaries do, so the most common skills dominate this ranking: Python, SQL, AWS, Spark, Azure, and so on.
+---
 
-**Option 2: Log-scaled score**
+## 🏗 Analysis Overview
 
-```
-optimal_score = (salary_median * LN(demand_count)) / 1,000,000
-```
+### Query Structure
 
-Taking the natural log of demand shrinks the gaps between very common and less common skills, which gives salary more weight.
+1. **[Top Demanded Skills](./01_top_demanded_skills.sql)** – Identifies the 10 most in-demand skills for remote data engineer positions
+2. **[Top Paying Skills](./02_top_paying_skills.sql)** – Analyzes the 25 highest-paying skills (by median salary) with salary and demand metrics
+3. **[Optimal Skills](./03_optimal_skills.sql)** – Compares two scoring methods (linear vs. natural log of demand combined with median salary) to identify the most valuable skills to learn
 
-| Rank | Skill     | Median Salary | ln(Demand) | Score |
-|------|-----------|--------------:|-----------:|------:|
-| 1    | Terraform | $184,000      | 5.3        | 0.97  |
-| 2    | Python    | $135,000      | 7.0        | 0.95  |
-| 3    | SQL       | $130,000      | 7.0        | 0.91  |
-| 4    | AWS       | $137,320      | 6.7        | 0.91  |
-| 5    | Airflow   | $150,000      | 6.0        | 0.89  |
-| 6    | Spark     | $140,000      | 6.2        | 0.87  |
-| 7    | Snowflake | $135,500      | 6.1        | 0.82  |
-| 8    | Kafka     | $145,000      | 5.7        | 0.82  |
-| 9    | Azure     | $128,000      | 6.2        | 0.79  |
-| 10   | Java      | $135,000      | 5.7        | 0.77  |
+### Results at a Glance
 
-**Takeaway:** The log-scaled ranking balances the two factors better. Terraform comes out on top because it pairs a high salary with solid demand. Python and SQL stay near the top on demand alone, and Airflow and AWS balance both well. This is a custom metric, so the ranking depends on the formula chosen.
+| Top Demanded | Postings | Top Paying | Median Salary | Optimal (log score) | Score |
+|--------------|---------:|------------|--------------:|---------------------|------:|
+| SQL          | 29,221   | Rust       | $210,000      | Terraform           | 0.97  |
+| Python       | 28,776   | Terraform  | $184,000      | Python              | 0.95  |
+| AWS          | 17,823   | Golang     | $184,000      | SQL                 | 0.91  |
+| Azure        | 14,143   | Spring     | $175,500      | AWS                 | 0.91  |
+| Spark        | 12,799   | Neo4j      | $170,000      | Airflow             | 0.89  |
 
-## Key Findings
+### Key Insights
 
-1. **SQL and Python are the foundation.** They are the most requested skills by far and still rank near the top once salary is factored in.
-2. **Cloud skills are essential.** AWS, Azure, and GCP appear in every ranking.
-3. **Infrastructure-as-code pays.** Terraform has the best combined demand and salary score.
-4. **Orchestration and streaming matter.** Airflow, Spark, and Kafka offer both demand and above-average pay.
+- 🧠 **Core languages:** SQL and Python each appear in ~29,000 remote job postings, making them the most demanded skills
+- ☁️ **Cloud platforms:** AWS, Azure, and GCP are critical for modern data engineering roles
+- 🧱 **Infra & tooling:** Terraform and Kubernetes are associated with premium salaries ($184K and $150.5K median) while still being widely requested
+- 🔥 **Big data & orchestration:** Spark and Airflow show strong demand with competitive compensation
+- 🦀 **Niche but lucrative:** Rust has the highest median salary ($210K) but limited demand (232 postings)
 
-## SQL Concepts Used
+---
 
-- `INNER JOIN` / `LEFT JOIN` across fact, bridge, and dimension tables
-- Aggregations: `COUNT`, `MEDIAN`
-- `GROUP BY` with `HAVING` filters
-- Math functions: `LN`, `ROUND`
-- Table aliases, `ORDER BY`, `LIMIT`
+## 💻 SQL Skills Demonstrated
 
+### Query Design & Optimization
 
-```
+- **Complex Joins**: Multi-table `INNER JOIN` operations across `job_postings_fact`, `skills_job_dim`, and `skills_dim`
+- **Aggregations**: `COUNT()`, `MEDIAN()`, `ROUND()` for statistical analysis
+- **Filtering**: Boolean logic with `WHERE` clauses and multiple conditions (`job_title_short`, `job_work_from_home`, `salary_year_avg IS NOT NULL`)
+- **Sorting & Limiting**: `ORDER BY` with `DESC` and `LIMIT` for top-N analysis
+
+### Data Analysis Techniques
+
+- **Grouping**: `GROUP BY` for categorical analysis by skill
+- **Mathematical Functions**: `LN()` for natural logarithm transformation to normalize demand metrics
+- **Calculated Metrics**: Derived optimal score combining log-transformed demand with median salary
+- **HAVING Clause**: Filtering aggregated results (skills with more than 100 postings)
+- **NULL Handling**: Proper filtering of incomplete records (`salary_year_avg IS NOT NULL`)
+- **Robust Statistics**: Median instead of average to reduce the impact of outlier salaries
