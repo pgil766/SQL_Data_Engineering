@@ -1,8 +1,8 @@
 /*
-Question: What are the top 10 most demanded skills for data engineers?
+Question: What are the top 10 most demanded skills for data engineers in Colombia?
 -Identifiy the top 10 in-demand skills for data engineers
--Focus on remote job postings
-because i want to see which are the top skills that are being requested for remote data engineering positions
+-Focus on job postings from Colombia
+because i want to see which are the top skills that are being requested for data engineering positions in my country
 */  
 
 SELECT
@@ -14,13 +14,14 @@ INNER JOIN skills_job_dim as sjd
 INNER JOIN skills_dim as sd
     ON sjd.skill_id = sd.skill_id
 WHERE 
-    jpf.job_title_short = 'Data Engineer' AND jpf.job_work_from_home = TRUE
+    jpf.job_title_short = 'Data Engineer'
+    AND jpf.job_country = 'Colombia'
 GROUP BY sd.skills
 ORDER BY skill_count DESC
 LIMIT 10;
 
 /*
-Here are the top 10 most demanded skills for data engineers based on remote job postings:
+Here are the top 10 most demanded skills for data engineers in Colombia based on job postings:
 
 ┌────────────┬─────────────┐
 │   skills   │ skill_count │
